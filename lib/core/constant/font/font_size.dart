@@ -12,3 +12,8 @@ class FontWeights {
   static const w600 = FontWeight.w600;
   static const w700 = FontWeight.w700;
 }
+
+class FontFamily {
+  static const roboto = "Roboto";
+  static const edu = "Edu";
+}

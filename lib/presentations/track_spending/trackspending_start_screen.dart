@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2_5/core/constant/color/app_color.dart';
 import 'package:flutter2_5/core/constant/font/font_size.dart';
 import 'package:flutter2_5/core/data/model/trackspending_model.dart';
+import 'package:flutter2_5/presentations/track_spending/trackspending_homescreen.dart';
 
 class TrackSpendingStartScreen extends StatelessWidget {
   const TrackSpendingStartScreen({super.key});
@@ -21,6 +22,7 @@ class TrackSpendingStartScreen extends StatelessWidget {
               style: TextStyle(
                 color: AppColor.oldGreen,
                 fontSize: FontSize.font45,
+                fontFamily: FontFamily.roboto,
               ),
             ),
             const SizedBox(height: 20),
@@ -29,6 +31,7 @@ class TrackSpendingStartScreen extends StatelessWidget {
               style: TextStyle(
                 color: AppColor.oldGreen,
                 fontSize: FontSize.font18,
+                fontFamily: FontFamily.roboto,
               ),
             ),
             Padding(
@@ -37,7 +40,27 @@ class TrackSpendingStartScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const Dialog.fullscreen(
+                        backgroundColor: Colors.black12,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
+                    await Future.delayed(const Duration(seconds: 2)).then(
+                      (value) => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TrackSpendingHomeScreen(),
+                        ),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll(AppColor.oldGreen),
