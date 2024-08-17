@@ -4,6 +4,7 @@ class FontSize {
   static const font16 = 16.0;
   static const font18 = 18.0;
   static const font20 = 20.0;
+  static const font30 = 30.0;
   static const font45 = 45.0;
 }
 
