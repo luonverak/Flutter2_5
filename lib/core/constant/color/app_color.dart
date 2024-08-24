@@ -5,4 +5,5 @@ class AppColor {
   static var oldGreen = Colors.green[900];
   static var greenBackground = Colors.green[100];
   static const white = Colors.white;
+  static const black = Colors.black;
 }

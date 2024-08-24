@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FontSize {
+  static const font14 = 14.0;
   static const font16 = 16.0;
   static const font18 = 18.0;
   static const font20 = 20.0;

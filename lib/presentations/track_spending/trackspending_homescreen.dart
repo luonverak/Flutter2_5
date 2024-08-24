@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter2_5/core/constant/color/app_color.dart';
 import 'package:flutter2_5/core/constant/font/font_size.dart';
+import 'package:flutter2_5/core/constant/radius/app_radius.dart';
+import 'package:flutter2_5/core/data/model/credit_card_model.dart';
+import 'package:flutter2_5/core/data/model/recent_activity_model.dart';
+import 'package:flutter2_5/presentations/track_spending/widget/credit_cart.dart';
+import 'package:flutter2_5/presentations/track_spending/widget/option_botton.dart';
+import 'package:flutter2_5/presentations/track_spending/widget/recent_activity.dart';
 
 class TrackSpendingHomeScreen extends StatefulWidget {
   const TrackSpendingHomeScreen({super.key});
@@ -13,6 +19,7 @@ class TrackSpendingHomeScreen extends StatefulWidget {
 
 class _TrackSpendingHomeScreenState extends State<TrackSpendingHomeScreen> {
   bool balance = false;
+  int _indexCard = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +59,15 @@ class _TrackSpendingHomeScreenState extends State<TrackSpendingHomeScreen> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 30),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Wallet balance"),
+                  const Text(
+                    "Wallet balance",
+                    style: TextStyle(
+                        fontSize: FontSize.font18, color: AppColor.black),
+                  ),
                   Row(
                     children: [
                       balance == false
@@ -65,7 +76,8 @@ class _TrackSpendingHomeScreenState extends State<TrackSpendingHomeScreen> {
                               height: 40,
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey,
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(
+                                    AppRadius.borderRadius10),
                               ),
                             )
                           : Visibility(
@@ -92,39 +104,114 @@ class _TrackSpendingHomeScreenState extends State<TrackSpendingHomeScreen> {
                   Row(
                     children: [
                       const Text(
-                        "Cart",
+                        "Cards",
                         style: TextStyle(fontSize: FontSize.font18),
                       ),
                       const SizedBox(width: 30),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: AppColor.greenBackground,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppColor.oldGreen,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          child: const Icon(
-                            Icons.add,
-                            color: AppColor.white,
+                      GestureDetector(
+                        onTap: () {
+                          if (_indexCard == listCreditCard.length) {
+                            return;
+                          }
+                          setState(() {
+                            _indexCard += 1;
+                          });
+                        },
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: AppColor.greenBackground,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.oldGreen,
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            child: const Icon(
+                              Icons.add,
+                              color: AppColor.white,
+                            ),
                           ),
                         ),
                       ),
                       const SizedBox(width: 20),
-                      Container(
-                        width: 100,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          borderRadius: BorderRadius.circular(10),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              _indexCard,
+                              (index) => creditCard(listCreditCard[index]),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: optionsBotton(
+                          color: AppColor.oldGreen,
+                          label: "Send",
+                          textColor: AppColor.green,
+                          icon: Icons.send_to_mobile,
+                          iconColor: AppColor.green,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: optionsBotton(
+                          color: AppColor.green,
+                          label: "Request",
+                          textColor: AppColor.oldGreen,
+                          icon: Icons.arrow_downward,
+                          iconColor: AppColor.oldGreen,
+                        ),
+                      ),
+                      Expanded(
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: AppColor.greenBackground,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset("asset/image/categories.png"),
+                          ),
                         ),
                       ),
                     ],
+                  )
+                ],
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Text(
+                    "Recent Activity",
+                    style: TextStyle(
+                        fontSize: FontSize.font18,
+                        fontWeight: FontWeights.w600),
+                  ),
+                  Spacer(),
+                  Text(
+                    "See More",
+                    style: TextStyle(fontSize: FontSize.font18),
                   ),
                 ],
               ),
             ),
           ),
+          SliverList.builder(
+            itemCount: listRecentActivity.length,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: recentActivity(listRecentActivity[index]),
+            ),
+          )
         ],
       ),
     );
