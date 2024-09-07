@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2_5/core/constant/color/app_color.dart';
 import 'package:flutter2_5/core/data/model/line_current_page.dart';
+import 'package:flutter2_5/presentations/chat/choose_topic.dart';
+import 'package:flutter2_5/presentations/chat/widget/slide.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -19,12 +21,14 @@ class _StartScreenState extends State<StartScreen> {
       listLineCurrentPage[0].width = 60;
       listLineCurrentPage[_currentPage].color = Colors.amber;
     }
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: PageView(
         onPageChanged: (value) {
           _currentPage = value;
@@ -38,7 +42,7 @@ class _StartScreenState extends State<StartScreen> {
           });
         },
         controller: _pageController,
-        children: listPageView,
+        children: listSlideScreen,
       ),
       floatingActionButton: Row(
         children: [
@@ -54,15 +58,13 @@ class _StartScreenState extends State<StartScreen> {
           )),
           const Spacer(),
           FloatingActionButton(
-            backgroundColor: AppColor.purple,
+            backgroundColor: AppColor.blue,
             onPressed: () {
-              setState(() {
-                if (_currentPage != listPageView.length - 1) {
-                  _pageController.jumpToPage(_currentPage + 1);
-                } else {
-                  _pageController.jumpToPage(0);
-                }
-              });
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChooseTopic(),
+                  ));
             },
             child: const Icon(
               Icons.arrow_forward,
@@ -88,15 +90,3 @@ Widget currentPage({required LineCurrentPage lineCurrentPage}) {
     ),
   );
 }
-
-List<Widget> listPageView = [
-  Container(
-    color: const Color.fromARGB(255, 7, 255, 247),
-  ),
-  Container(
-    color: Colors.red,
-  ),
-  Container(
-    color: Colors.black,
-  )
-];
