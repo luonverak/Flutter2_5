@@ -3,7 +3,6 @@ import 'package:flutter2_5/core/constant/color/app_color.dart';
 import 'package:flutter2_5/core/constant/font/font_size.dart';
 import 'package:flutter2_5/core/constant/radius/app_radius.dart';
 import 'package:flutter2_5/core/package/conform_message.dart';
-import 'package:lottie/lottie.dart';
 
 class ChooseTopic extends StatelessWidget {
   const ChooseTopic({super.key});
