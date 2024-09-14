@@ -3,10 +3,18 @@ import 'package:flutter2_5/core/constant/color/app_color.dart';
 import 'package:flutter2_5/core/constant/font/font_size.dart';
 import 'package:flutter2_5/core/constant/radius/app_radius.dart';
 import 'package:flutter2_5/core/package/conform_message.dart';
+import 'package:flutter2_5/presentations/chat/landing_screen.dart';
+import 'package:flutter2_5/presentations/chat/widget/topic.dart';
 
-class ChooseTopic extends StatelessWidget {
+class ChooseTopic extends StatefulWidget {
   const ChooseTopic({super.key});
 
+  @override
+  State<ChooseTopic> createState() => _ChooseTopicState();
+}
+
+class _ChooseTopicState extends State<ChooseTopic> {
+  bool _status = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +43,9 @@ class ChooseTopic extends StatelessWidget {
                       ),
                       child: IconButton(
                         icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ),
                     const SizedBox(width: 20),
@@ -44,7 +54,7 @@ class ChooseTopic extends StatelessWidget {
                         "Choose your favorite topic",
                         style: TextStyle(
                           fontSize: FontSize.font30,
-                          fontWeight: FontWeights.w600,
+                          fontWeight: AppFontWeights.w600,
                         ),
                       ),
                     )
@@ -55,7 +65,7 @@ class ChooseTopic extends StatelessWidget {
                   "Language to learn",
                   style: TextStyle(
                     fontSize: FontSize.font20,
-                    fontWeight: FontWeights.w600,
+                    fontWeight: AppFontWeights.w600,
                   ),
                 ),
                 Container(
@@ -103,30 +113,91 @@ class ChooseTopic extends StatelessWidget {
                               accept: () {},
                             );
                           },
-                          child: Container(
-                            height: 70,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColor.bgGray,
-                              borderRadius: BorderRadius.circular(
-                                  AppRadius.borderRadius10),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 15, right: 15),
-                              child: Text(
-                                "Dart & Flutter",
-                                style: TextStyle(
-                                  fontSize: FontSize.font18,
-                                ),
-                              ),
-                            ),
-                          ),
+                          child: topicWidget(color: AppColor.bgGray),
                         ),
                       );
                     }),
                   ),
                 ),
+                const SizedBox(height: 30),
+                const Text(
+                  "Topic of interest",
+                  style: TextStyle(
+                    fontSize: FontSize.font20,
+                    fontWeight: AppFontWeights.w600,
+                  ),
+                ),
+                GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.4,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            if (_status) {
+                              _status = false;
+                            } else {
+                              _status = true;
+                            }
+                          });
+                        },
+                        child: topicWidget(
+                            color: _status ? Colors.orange : AppColor.bgGray),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: topicWidget(color: AppColor.bgGray),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: topicWidget(color: AppColor.bgGray),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: topicWidget(color: AppColor.bgGray),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: topicWidget(color: AppColor.bgGray),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: topicWidget(color: AppColor.bgGray),
+                    ),
+                  ],
+                )
               ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LandingScreen(),
+              )),
+          child: Container(
+            width: double.infinity,
+            height: 70,
+            decoration: BoxDecoration(
+              color: AppColor.purple,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            alignment: Alignment.center,
+            child: const Text(
+              "Get Start",
+              style: TextStyle(
+                fontSize: FontSize.font20,
+                color: AppColor.white,
+                fontWeight: AppFontWeights.w600,
+              ),
             ),
           ),
         ),

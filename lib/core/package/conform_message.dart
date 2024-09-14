@@ -40,7 +40,7 @@ Future<void> comfirmMessage(
                       title,
                       style: const TextStyle(
                         fontSize: 25,
-                        fontWeight: FontWeights.w500,
+                        fontWeight: AppFontWeights.w500,
                       ),
                     ),
                   ),

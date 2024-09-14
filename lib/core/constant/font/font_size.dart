@@ -9,7 +9,7 @@ class FontSize {
   static const font45 = 45.0;
 }
 
-class FontWeights {
+class AppFontWeights {
   static const w500 = FontWeight.w500;
   static const w600 = FontWeight.w600;
   static const w700 = FontWeight.w700;

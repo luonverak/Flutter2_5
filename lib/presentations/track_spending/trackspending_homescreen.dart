@@ -34,7 +34,7 @@ class _TrackSpendingHomeScreenState extends State<TrackSpendingHomeScreen> {
                 "Hi, Verak",
                 style: TextStyle(
                   fontSize: FontSize.font20,
-                  fontWeight: FontWeights.w600,
+                  fontWeight: AppFontWeights.w600,
                 ),
               ),
               subtitle: Text(
@@ -194,7 +194,7 @@ class _TrackSpendingHomeScreenState extends State<TrackSpendingHomeScreen> {
                     "Recent Activity",
                     style: TextStyle(
                         fontSize: FontSize.font18,
-                        fontWeight: FontWeights.w600),
+                        fontWeight: AppFontWeights.w600),
                   ),
                   Spacer(),
                   Text(

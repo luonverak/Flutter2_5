@@ -22,7 +22,7 @@ Widget recentActivity(RecentActivityModel activityModel) {
               Text(
                 activityModel.title,
                 style: const TextStyle(
-                    fontSize: FontSize.font16, fontWeight: FontWeights.w600),
+                    fontSize: FontSize.font16, fontWeight: AppFontWeights.w600),
               ),
               Text(
                 activityModel.date,
@@ -37,7 +37,7 @@ Widget recentActivity(RecentActivityModel activityModel) {
               Text(
                 activityModel.amount,
                 style: const TextStyle(
-                    fontSize: FontSize.font16, fontWeight: FontWeights.w600),
+                    fontSize: FontSize.font16, fontWeight: AppFontWeights.w600),
               ),
               Text(
                 activityModel.status,

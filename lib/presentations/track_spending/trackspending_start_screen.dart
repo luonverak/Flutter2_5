@@ -89,7 +89,7 @@ class TrackSpendingStartScreen extends StatelessWidget {
                     style: TextStyle(
                       color: AppColor.oldGreen,
                       fontSize: FontSize.font16,
-                      fontWeight: FontWeights.w600,
+                      fontWeight: AppFontWeights.w600,
                     ),
                   ),
                 ],
